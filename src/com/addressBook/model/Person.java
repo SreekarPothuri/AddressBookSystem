@@ -1,17 +1,22 @@
 package com.addressBook.model;
 
 public class Person {
-	private String firstName;
-	private String lastName;
-	private Address address;
-	private String mobileNum;
+	public String firstName;
+	public String lastName;
+	public String address;
+	public String city;
+	public  String state;
+	public String mobileNum;
+	public String zipCode;
 	
-	private Person(){}
-    
-	Person(String firstName, String lastName,Address address, String MobileNumber){
-            this.firstName = firstName;
-            this.lastName = lastName;
-            this.address = address;
-            this.mobileNum = mobileNum;
-    }
+	public Person(String firstName, String lastName,String address,String city,String state,String mobileNum,String zipCode)
+	{
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.address = address;
+		this.city = city;
+		this.state = state;
+		this.mobileNum = mobileNum;
+		this.zipCode = zipCode;
+	}
 }
