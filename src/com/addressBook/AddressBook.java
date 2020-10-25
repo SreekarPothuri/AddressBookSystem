@@ -94,7 +94,17 @@ public class AddressBook {
 	}
 
 	private void deleteContact() {
-		
+		if(personList.isEmpty()){
+			System.out.println("There are no contacts to delete in the addressbook");
+		} else {
+			System.out.println("Enter firstname to delete the person");
+			String firstName = sc.nextLine();
+			for(int count=0;count < personList.size(); count++){
+				if(personList.get(count).getFirstName().equals(firstName)){
+					personList.remove(personList.get(count));
+				}
+			}
+		}
 	}
 
 	public static void main(String args[]) {
