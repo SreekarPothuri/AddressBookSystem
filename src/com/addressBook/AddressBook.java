@@ -98,7 +98,7 @@ public class AddressBook {
 			System.out.println("There are no contacts to delete in the addressbook");
 		} else {
 			System.out.println("Enter firstname to delete the person");
-			String firstName = sc.nextLine();
+			String firstName = sc.next();
 			for(int count=0;count < personList.size(); count++){
 				if(personList.get(count).getFirstName().equals(firstName)){
 					personList.remove(personList.get(count));
@@ -106,12 +106,23 @@ public class AddressBook {
 			}
 		}
 	}
+	
+	public static void addMultiplePerson() {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter how many contacts you want to add: ");
+		int numofContacts = sc.nextInt();
+		int createdContacts = 1;
+		while(createdContacts <= numofContacts) {
+			addPerson();
+			flag++;
+		}
+	}
 
 	public static void main(String args[]) {
 		AddressBook contact = new AddressBook();
 		System.out.println("*****WELCOME TO ADDRESS BOOK PROGRAM*****");
 		while(choice <= 5) {
-			System.out.println("1.Add Person\n2.Print contact details\n3.Edit contact details\n4.Delete contact details\n5.Exit ");
+			System.out.println("1.Add Person\n2.Print contact details\n3.Edit contact details\n4.Delete contact details\n5.Exit\n6.Add another Person");
 			choice = sc.nextInt();
 			switch(choice) {
 			case 1:
@@ -127,11 +138,12 @@ public class AddressBook {
 				contact.deleteContact();
 			case 5:
 				System.exit(0);
+			case 6:
+				contact.addMultiplePerson();
 			default:
 				System.out.println("Error! Choose right option from the above given options Only");
 			}
 		}
 	}
-	
 }
 
