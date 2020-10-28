@@ -107,7 +107,7 @@ public class AddressBook {
 		}
 	}
 	
-	public static void addMultiplePerson() {
+	private void addMultiplePerson() {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Enter how many contacts you want to add: ");
 		int numofContacts = sc.nextInt();
@@ -118,7 +118,7 @@ public class AddressBook {
 		}
 	}
 
-	public static boolean addressBookWithUniqueName() {
+	private boolean addressBookWithUniqueName() {
 		System.out.println("FirstName of a person is referred to as AddressBookName");
 		System.out.println("Enter First Name");
 		String firstName = sc.next();
@@ -129,6 +129,20 @@ public class AddressBook {
 				return true;
 			}
 		}
+		return true;
+	}
+	
+	private boolean noDuplicateEntry() {
+		System.out.println("Enter your name");
+		String name = sc.next();
+		for(int count=0;count < personList.size(); count++){
+			if(personList.get(count).getFirstName().equals(firstName)+" "+personList.get(count).getLastName().equals(lastName)){
+				System.out.println("Already an AddressBook exist with this name");
+			}else {
+				return true;
+			}
+		}
+		return true;
 	}
 	
 	public static void main(String args[]) {
@@ -139,7 +153,7 @@ public class AddressBook {
 			choice = sc.nextInt();
 			switch(choice) {
 			case 1:
-				if(contact.addressBookWithUniqueName() == true) {
+				if((contact.addressBookWithUniqueName() && contact.noDuplicateEntry()) == true) {
 					contact.addPerson();
 				}
 				break;
