@@ -145,11 +145,22 @@ public class AddressBook {
 		return true;
 	}
 	
+	private void searchByCity() {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter city name");
+		String city = sc.nextLine();
+		sc.close();
+		for(Person list : personList) {
+			if(list.getCity().equals(city))
+				System.out.println(list);
+		}
+	}
+	
 	public static void main(String args[]) {
 		AddressBook contact = new AddressBook();
 		System.out.println("*****WELCOME TO ADDRESS BOOK PROGRAM*****");
 		while(choice <= 5) {
-			System.out.println("1.Add Person\n2.Print contact details\n3.Edit contact details\n4.Delete contact details\n5.Exit\n6.Add another Person");
+			System.out.println("1.Add Person\n2.Print contact details\n3.Edit contact details\n4.Delete contact details\n5.Exit\n6.Add another Person\n7.Search By City");
 			choice = sc.nextInt();
 			switch(choice) {
 			case 1:
@@ -169,6 +180,8 @@ public class AddressBook {
 				System.exit(0);
 			case 6:
 				contact.addMultiplePerson();
+			case 7:
+				contact.searchByCity();
 			default:
 				System.out.println("Error! Choose right option from the above given options Only");
 			}
