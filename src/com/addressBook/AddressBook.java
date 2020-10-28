@@ -118,6 +118,19 @@ public class AddressBook {
 		}
 	}
 
+	public static boolean addressBookWithUniqueName() {
+		System.out.println("FirstName of a person is referred to as AddressBookName");
+		System.out.println("Enter First Name");
+		String firstName = sc.next();
+		for(int count=0;count < personList.size(); count++){
+			if(personList.get(count).getFirstName().equals(firstName)){
+				System.out.println("Already an AddressBook exist with this name");
+			}else {
+				return true;
+			}
+		}
+	}
+	
 	public static void main(String args[]) {
 		AddressBook contact = new AddressBook();
 		System.out.println("*****WELCOME TO ADDRESS BOOK PROGRAM*****");
@@ -126,7 +139,9 @@ public class AddressBook {
 			choice = sc.nextInt();
 			switch(choice) {
 			case 1:
-				contact.addPerson();
+				if(contact.addressBookWithUniqueName() == true) {
+					contact.addPerson();
+				}
 				break;
 			case 2:
 				contact.printContact();
