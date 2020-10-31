@@ -7,11 +7,10 @@ import java.util.Scanner;
 import com.addressBook.model.Person;
 
 public class AddressBook {
-	
 	public static List<Person> personList = new ArrayList<Person>();
 	static Scanner sc = new Scanner(System.in);
 	
-	static int choice = 0;
+	static int choice =0;
 	
 	private void addPerson()
 	{
@@ -113,9 +112,23 @@ public class AddressBook {
 		int numofContacts = sc.nextInt();
 		int createdContacts = 1;
 		while(createdContacts <= numofContacts) {
+			if(addressBookWithUniqueName() == true)	
 				addPerson();
 			createdContacts++;
 		}
+	}
+
+	private boolean addressBookWithUniqueName() {
+		System.out.println("FirstName of a person is referred to as AddressBookName");
+		System.out.println("Enter AddressBook Name to check Uniqueness");
+		String firstName = sc.next();
+		for(int count=0;count < personList.size(); count++){
+			if(personList.get(count).getFirstName().equals(firstName)){
+				System.out.println("Already an AddressBook exist with this name");
+				return false;
+			}
+		}
+		return true;
 	}
 
 	public static void main(String args[]) {
