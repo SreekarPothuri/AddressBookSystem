@@ -31,7 +31,7 @@ public class AddressBook {
 		System.out.println("Enter Mobile Number: ");
 		String mobileNum = sc.next();
 		System.out.println("Enter zipCode: ");
-		String zipCode = sc.next();
+		long zipCode = sc.nextLong();
 
 		Person person = new Person(firstName, lastName, address, city, state, mobileNum, zipCode);
 		personList.add(person);
@@ -42,7 +42,8 @@ public class AddressBook {
 		if (personList.isEmpty()) {
 			System.out.println("There are no contacts to print");
 		} else {
-			String address, city, state, mobileNum, zipCode;
+			String address, city, state, mobileNum;
+			long zipCode;
 			int id;
 			for (Person contact : personList) {
 				System.out.println("ID " + personList.indexOf(contact) + ":\n" + contact);
@@ -71,7 +72,7 @@ public class AddressBook {
 				break;
 			case 4:
 				System.out.println("Enter Zip Code: ");
-				zipCode = sc.next();
+				zipCode = sc.nextLong();
 				personList.get(id).setZipCode(zipCode);
 				break;
 			case 5:
@@ -176,6 +177,27 @@ public class AddressBook {
 		sortedList = personList.stream().sorted(nameComparator).collect(Collectors.toList());
 		sortedList.stream().forEach(i -> System.out.println(i));
 	}
+	
+	public void sortByCity(){
+        Comparator<Person> nameComparator = Comparator.comparing(Person::getCity);
+		List<Person> sortedList = new ArrayList<Person>();
+		sortedList = personList.stream().sorted(nameComparator).collect(Collectors.toList());
+		sortedList.stream().forEach(i -> System.out.println(i));
+	}
+	
+	public void sortByState(){
+        Comparator<Person> nameComparator = Comparator.comparing(Person::getState);
+		List<Person> sortedList = new ArrayList<Person>();
+		sortedList = personList.stream().sorted(nameComparator).collect(Collectors.toList());
+		sortedList.stream().forEach(i -> System.out.println(i));
+	}
+	
+	public void sortByZip(){
+        Comparator<Person> nameComparator = Comparator.comparing(Person::getZipCode);
+		List<Person> sortedList = new ArrayList<Person>();
+		sortedList = personList.stream().sorted(nameComparator).collect(Collectors.toList());
+		sortedList.stream().forEach(i -> System.out.println(i));
+	}
 
 	public static void main(String args[]) {
 		AddressBook contact = new AddressBook();
@@ -184,7 +206,8 @@ public class AddressBook {
 		while (choice <= 13) {
 			System.out.println("1.Add Person\n2.Print contact details\n3.Edit contact details\n"
 					+ "4.Delete contact details\n5.Exit\n6.Add another Person\n7.Search By City\n8.View By City\n"
-					+ "9.Count Based On City\n10.Sort by FirstName");
+					+ "9.Count Based On City\n10.Sort by FirstName\n11.Sort By City\n12.Sort By State\n"
+					+ "13.Sort By ZipCode");
 			choice = sc.nextInt();
 			switch (choice) {
 			case 1:
@@ -216,6 +239,15 @@ public class AddressBook {
 				break;
 			case 10:
 				contact.sortByFirstName();
+				break;
+			case 11:
+				contact.sortByCity();
+				break;
+			case 12:
+				contact.sortByState();
+				break;
+			case 13:
+				contact.sortByZip();
 				break;
 			default:
 				System.out.println("Error! Choose right option from the above given options Only");
