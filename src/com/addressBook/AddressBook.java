@@ -1,6 +1,7 @@
 package com.addressBook;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -113,16 +114,14 @@ public class AddressBook {
 		int numofContacts = sc.nextInt();
 		int createdContacts = 1;
 		while(createdContacts <= numofContacts) {
-			if((addressBookWithUniqueName() == true) && (noDuplicateEntry() == true)) {
 				addPerson();
-			}
 			createdContacts++;
 		}
 	}
 
 	private boolean addressBookWithUniqueName() {
 		System.out.println("FirstName of a person is referred to as AddressBookName");
-		System.out.println("Enter AddressBook Name");
+		System.out.println("Enter AddressBook Name to check Uniqueness");
 		String firstName = sc.next();
 		for(int count=0;count < personList.size(); count++){
 			if(personList.get(count).getFirstName().equals(firstName)){
@@ -133,64 +132,18 @@ public class AddressBook {
 		return true;
 	}
 	
-	private boolean noDuplicateEntry() {
-		System.out.println("Enter your First Name");
-		String name = sc.next();
-		//personList.stream().filter(nam -> nam.getFirstName().equals(name)?false:true);
-		for(int count=0;count < personList.size(); count++){
-			if(personList.get(count).getFirstName().equals(name)){
-				System.out.println("Already an AddressBook exist with this name");
-				return false;
-			}
-		}
-		return true;
-	}
-	
-	private void searchByCity() {
-		System.out.println("Enter city name");
-		String city = sc.next();
-		for(Person list : personList) {
-			if(list.getCity().equals(city))
-				System.out.println(list.firstName);
-		}
-	}
-	
-	private void viewByCity() {
-		System.out.println("Enter city name");
-		String city = sc.next();
-		for (Person list : personList) {
-			if (list.getCity().equals(city))
-				System.out.println(list);
-		}
-	}
-	
-	private void countBasedOnCity() {
-		int cityCount = 0;
-		System.out.println("Enter city name");
-		String city = sc.next();
-		for(Person list : personList) {
-			if(list.getCity().equals(city)) {
-				cityCount++;
-				System.out.println("Number of persons in "+ city +" is "+cityCount);
-			}else {
-				System.out.println("No person from "+city+" exist");
-			}
-		}
-	}
 	
 	public static void main(String args[]) {
 		AddressBook contact = new AddressBook();
 		System.out.println("*****WELCOME TO ADDRESS BOOK PROGRAM*****");
 		
-		while(choice <= 10) {
+		while(choice <= 13) {
 			System.out.println("1.Add Person\n2.Print contact details\n3.Edit contact details\n"
-					+ "4.Delete contact details\n5.Exit\n6.Add another Person\n7.Search By City\n8.View By City\n9.Count Based On City");
+					+ "4.Delete contact details\n5.Exit\n6.Add another Person");
 			choice = sc.nextInt();
 			switch(choice) {
 			case 1:
-				if((contact.addressBookWithUniqueName() && contact.noDuplicateEntry()) == true) {
 					contact.addPerson();
-				}
 				break;
 			case 2:
 				contact.printContact();
@@ -206,15 +159,6 @@ public class AddressBook {
 				break;
 			case 6:
 				contact.addMultiplePerson();
-				break;
-			case 7:
-				contact.searchByCity();
-				break;
-			case 8:
-				contact.viewByCity();
-				break;
-			case 9:
-				contact.countBasedOnCity();
 				break;
 			default:
 				System.out.println("Error! Choose right option from the above given options Only");
