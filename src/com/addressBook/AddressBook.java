@@ -203,11 +203,11 @@ public class AddressBook {
 		AddressBook contact = new AddressBook();
 		System.out.println("*****WELCOME TO ADDRESS BOOK PROGRAM*****");
 
-		while (choice <= 13) {
+			do	{
 			System.out.println("1.Add Person\n2.Print contact details\n3.Edit contact details\n"
-					+ "4.Delete contact details\n5.Exit\n6.Add another Person\n7.Search By City\n8.View By City\n"
-					+ "9.Count Based On City\n10.Sort by FirstName\n11.Sort By City\n12.Sort By State\n"
-					+ "13.Sort By ZipCode");
+					+ "4.Delete contact details\n5.Add another Person\n6.Search By City\n7.View By City\n"
+					+ "8.Count Based On City\n9.Sort by FirstName\n10.Sort By City\n11.Sort By State\n"
+					+ "12.Sort By ZipCode\n13.Exit");
 			choice = sc.nextInt();
 			switch (choice) {
 			case 1:
@@ -223,35 +223,35 @@ public class AddressBook {
 				contact.deleteContact();
 				break;
 			case 5:
-				System.exit(0);
-				break;
-			case 6:
 				contact.addMultiplePerson();
 				break;
-			case 7:
+			case 6:
 				contact.searchByCity();
 				break;
-			case 8:
+			case 7:
 				contact.viewByCity();
 				break;
-			case 9:
+			case 8:
 				contact.countBasedOnCity();
 				break;
-			case 10:
+			case 9:
 				contact.sortByFirstName();
 				break;
-			case 11:
+			case 10:
 				contact.sortByCity();
 				break;
-			case 12:
+			case 11:
 				contact.sortByState();
 				break;
-			case 13:
+			case 12:
 				contact.sortByZip();
+				break;
+			case 13:
+				System.out.println("Exited Successfully!!");
 				break;
 			default:
 				System.out.println("Error! Choose right option from the above given options Only");
 			}
-		}
+		}while (choice != 13);
 	}
 }
