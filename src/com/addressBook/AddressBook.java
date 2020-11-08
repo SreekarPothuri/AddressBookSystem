@@ -1,5 +1,9 @@
 package com.addressBook;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -13,8 +17,20 @@ public class AddressBook {
 
 	public static List<Person> personList = new ArrayList<Person>();
 	static Scanner sc = new Scanner(System.in);
+	AddressBookFileIOService addressBookIO = new AddressBookFileIOService();
+
+	public enum IOService {
+		CONSOLE_IO, FILE_IO, DB_IO, REST_IO
+	}
 
 	static int choice = 0;
+
+	public AddressBook(List<Person> personList) {
+		super();
+		this.personList = personList;
+	}
+
+	public AddressBook() {}
 
 	private void addPerson() {
 		System.out.println("Enter Person Details");
@@ -197,6 +213,24 @@ public class AddressBook {
 		List<Person> sortedList = new ArrayList<Person>();
 		sortedList = personList.stream().sorted(nameComparator).collect(Collectors.toList());
 		sortedList.stream().forEach(i -> System.out.println(i));
+	}
+	
+	public static void writeAddressBookData(IOService ioService) {
+		if (ioService.equals(AddressBook.IOService.CONSOLE_IO))
+			System.out.println("Employee Payroll to Details : " + personList);
+		if (ioService.equals(AddressBook.IOService.FILE_IO))
+			new AddressBookFileIOService().writeData(personList);
+	}
+
+	public void readDataFromFile() {
+		System.out.println("Enter address book name: ");
+		String addressBookFile = sc.nextLine();
+		Path filePath = Paths.get("F:\\BridgeLabz Fellowship Program\\practice\\AddressBookSystem\\" + addressBookFile + ".txt");
+		try {
+			Files.lines(filePath).map(line -> line.trim()).forEach(line -> System.out.println(line));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public static void main(String args[]) {
